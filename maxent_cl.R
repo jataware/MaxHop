@@ -2,17 +2,17 @@
 #an example run would be
 #Rscript maxent_cl.R --country=Ethiopia,Sudan --precipIncrease=.25 --aveTempIncrease=.5 --format=GTiff
 
-library(magrittr)
+require(magrittr)
 #install_github('johnbaums/rmaxent')
 library(rmaxent)
-library(magrittr)
-library(dismo)
-library(raster)
-library(rasterVis)
-library(viridis)
-library(sp)
-library(ggplot2)
-library(MASS)
+require(magrittr)
+require(dismo)
+require(raster)
+require(rasterVis)
+require(viridis)
+require(sp)
+require(ggplot2)
+require(MASS)
 
 #get arguments
 args <- commandArgs(trailingOnly = TRUE)
