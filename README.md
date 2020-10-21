@@ -38,7 +38,7 @@ More information about maxent can be found here:[https://biodiversityinformatics
 
 **How the maxent model works:**
 
-The maxent model uses environmental data along with species presence data to predict a species presence distribution. “From a set of environmental (e.g., climatic) grids and georeferenced occurrence localities, the model expresses a probability distribution where each grid cell has a predicted suitability of conditions for the species. Under particular assumptions about the input data and biological sampling efforts that led to occurrence records, the output can be interpreted as predicted probability of presence (cloglog transform), or as predicted local abundance (raw exponential output).”(“[https://biodiversityinformatics.amnh.org/open_source/maxent/](https://biodiversityinformatics.amnh.org/open_source/maxent/)”). In our use case we are most interested in the cloglog output raster.
+The maxent model uses environmental data along with species presence data to predict a species proabitlity of presence distribution. “From a set of environmental (e.g., climatic) grids and georeferenced occurrence localities, the model expresses a probability distribution where each grid cell has a predicted suitability of conditions for the species. Under particular assumptions about the input data and biological sampling efforts that led to occurrence records, the output can be interpreted as predicted probability of presence (cloglog transform), or as predicted local abundance (raw exponential output).”(“[https://biodiversityinformatics.amnh.org/open_source/maxent/](https://biodiversityinformatics.amnh.org/open_source/maxent/)”). In our use case we are most interested in the cloglog output raster.
 
 If you are interested in a deeper understanding of the maxent model we recommend reading (“[https://web.stanford.edu/~hastie/Papers/maxent_explained.pdf](https://web.stanford.edu/~hastie/Papers/maxent_explained.pdf)”).
 
@@ -111,9 +111,8 @@ The better model is the first one which is maxent_model. So we save this model a
     saveRDS(maxent_model,"models/maxent_locust_model_WestAfrica10-16-2020")
 
 ## III. Testing the Model
-This model was tested on countries across the most common areas in the locust range, with a focus on Ethiopia. To test the model the environmental rasters and the hopper records for that area need to be cropped.
+This model was tested on countries across the most common areas in the locust range, with a focus on Ethiopia. To test the model the environmental rasters and the hopper records for that area needed to be cropped for the correct testing area. An example of a layer from Ethiopia, clay percentage, is below.
 
-We will stack the environmental rasters together and run the model over the stack.
 **![](https://lh3.googleusercontent.com/3yO65nbg3KvN8mMFIUHoRgwY5m5sZMkbPwm7LqHXzmbZGzLsTuW3p_XOaz5YrmU_PeYpxh_3Ngy_i8XcxyhRnftyufUZe1uDj6P8jpl06sY9BkUazgccBZP7CYtY7qTaarU9XcKI)**
 Map_4: Shows the raster for Soil Clay percentage for Ethiopia. This will be one layer of our raster stack.
 
