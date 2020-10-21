@@ -7,4 +7,4 @@ docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output  cl_maxe
 This runs the container with a volume attached locally in the output folder. 
 The cl_maxent_locust_docker is the image to be run.
 The [command] lets docker know you want to overwrite the CMD code in the Dockerfile.
-The parameters after are in quotes and those are parsed by the r code, which determines which country, how much to increase or decrease the Annual Precipiation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii')
+The parameters after are in quotes and those are parsed by the r code, which determines which country, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii')
