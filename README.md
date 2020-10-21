@@ -106,7 +106,7 @@ Output:
 | Layer.1 |6541  |14|-71978.20|143984.5|143984.5|144079.4
 |Layer.2|6541|7|-73069.55|146153.1|146153.1|146200.6
 
-The better model is the first one which is maxent_model. So we save this model as and object with:
+The better model is the first one which is maxent_model. So we save this model as an object with:
 
     saveRDS(maxent_model,"models/maxent_locust_model_WestAfrica10-16-2020")
 
