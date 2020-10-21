@@ -174,7 +174,7 @@ Map_9: bg_notCorrected points.
 
 Map_10: bg_corrected points.
 
-The background points have been generated. Maxent uses these background points to create baseline values for the environmental conditions of the area. It makes an assumption that if locust presence was not effected by environmental conditions they would have a similar probability density in covariate space (see for more details). Now evaluate how well the model performs.
+The background points have been generated. Maxent uses these background points to create baseline values for the environmental conditions of the area. It makes an assumption that if locust presence was not effected by environmental conditions they would have a similar probability density in covariate space (see https://web.stanford.edu/~hastie/Papers/maxent_explained.pdf for more details). Now evaluate how well the model performs.
 
     #convert df of our locust data to spatial points.
     
