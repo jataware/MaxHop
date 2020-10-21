@@ -114,6 +114,7 @@ The better model is the first one which is maxent_model. So we save this model a
 This model was tested on countries across the most common areas in the locust range, with a focus on Ethiopia. To test the model the environmental rasters and the hopper records for that area needed to be cropped for the correct testing area. An example of a layer from Ethiopia, clay percentage, is below.
 
 **![](https://lh3.googleusercontent.com/3yO65nbg3KvN8mMFIUHoRgwY5m5sZMkbPwm7LqHXzmbZGzLsTuW3p_XOaz5YrmU_PeYpxh_3Ngy_i8XcxyhRnftyufUZe1uDj6P8jpl06sY9BkUazgccBZP7CYtY7qTaarU9XcKI)**
+
 Map_4: Shows the raster for Soil Clay percentage for Ethiopia. This will be one layer of our raster stack.
 
 To combine all the rasters into a stack you can use the following code. The stack function takes in rasters and combines them into one rasterStack object. They need to be the same projections and extent before this step. The most confusing step is changing the names of the rasters in the stack to match the rasters used in the training of the model. Since we trained the model on west Africa we need to change the new rasters names using the names function.
@@ -128,6 +129,7 @@ Project the model on the new area and plot the clogclog output.
     plot(prediction_eth$prediction_cloglog)
 
 **![](https://lh3.googleusercontent.com/FqHU2zkU9bPagRsbiL5GdRPhxcsVqGiQRSW_LrZ_L3GTR1Dz8tiE9ODv231BfLnTeeZDuTEY_WXPyRKBJdVBn_Z--ispY6jpQjuYyEx8grCDbtDGEU1c13gGiTeynQeRL0p1UKi2)**
+
 Map_5: Plot the prediction cloglog raster.
 
 The green areas of the map are where locusts are predicted to have a higher probability of presences. Let’s plot our locust points to see where the points fall and if the model is making sense. Let’s also change the background color to increase contrast.
@@ -138,6 +140,7 @@ The green areas of the map are where locusts are predicted to have a higher prob
 **![](https://lh4.googleusercontent.com/5-e8VT-Sc3B_7nMPDpOJTPOLKeA7P14Q3OoAzZBA2tqn-rpq1zpDvRBZnmjkxq9eKsEzlmleqTwxVYNYV2tfFigZp7_9Kkt2uZRb2nIKYzdiNgDn1sxlAowhGcSDswsuDJTEFwYW)**
 
 Map_6: cloglog prediction with hopper testing points overlaid.
+
 The points are falling near where the model is predicting points to be located so now test to see how well the model will evaluate testing hopper data versus background points. 
 Create two versions of background points. One will be the simple way of selecting background points which would be random across the whole study area(Map_10) and the other will be based on potential bias of data collection(Map_11). First create the density raster to see how dense the testing data is within our site.
 
@@ -147,8 +150,10 @@ Create two versions of background points. One will be the simple way of selectin
     dens.ras2 <- resample(dens.ras, Ethiopia_predictors)
 
 **![](https://lh3.googleusercontent.com/GHP6qxrL_g4ZDoNoOGcp57hr1yC0BlrFeBgDuVFkaPTxyb_WVEFtKc6L09BW6RVOwl5gVPtckJfgPxaU5cwi_QvGn4PtckNwmfIB2hFSaaD5kgxiqGBrTVUwwz9-aDPRwq34UaVU)**
+
 Map_7: This shows hopper detection locations in Ethiopia.
 **![](https://lh6.googleusercontent.com/RTbWO3W3WDMp-9vrzj-OnujmEImb9KLpsJ4ThLRF4Djunv8y_akavdtoNflN5EoQt4L67MUg6nXY6O-ouEUMUHuFyaxX_KvUqC9jIURgE_WGxQQmPGc4edNeBxv7IW2M2a-GAS67)**
+
 Map_8: Right- This map shows the density of hopper detections within Ethiopia.
 
 Looking at the density raster there is a high concentration of data collected in the northeastern part of the country, near Mile Serdo Wildlife Reserve. This could be due to more sampling in that area, or because the environmental conditions there are ideal for locust. To account for potential sampling bias in certain areas we will test the model with background points selected using the weight of the density bias found in the collected data.
@@ -162,9 +167,11 @@ Looking at the density raster there is a high concentration of data collected in
     bg_notCorrected <- xyFromCell(dens.ras2, sample(which(!is.na(values(subset(Ethiopia_predictors, 1)))), 10000))
 
 **![](https://lh6.googleusercontent.com/ZD1Sb5HqPBGrVjVkxpYH1A9R4uIXnJTcVf8mm-RwjopdMC9-0uKy-qOeqani2ZvuELRSuAI8VtZNymMAUh2negnR-rXGdKMnLUfgUt19cPpa7BXmOA_THKiLngqvSL8_Ghqk36Uz)**
+
 Map_9: bg_notCorrected points. 
 
 **![](https://lh4.googleusercontent.com/8emMsb9b8vIvo7s3Hbp8DHCOG0GHSgNOEFpyDuaek-MqpVJPhmctLlKbG0baNsTC4qCeUg_18XRZsDvXQ_rg271HE7Qd_9KDdUBb5gBjwwNnrVBRTK3UH01to2G3Im_nkuIHahSG)**
+
 Map_10: bg_corrected points.
 
 The background points have been generated. Maxent uses these background points to create baseline values for the environmental conditions of the area. It makes an assumption that if locust presence was not effected by environmental conditions they would have a similar probability density in covariate space (see for more details). Now evaluate how well the model performs.
@@ -202,6 +209,7 @@ For additional information on which environmental variable is limiting the locus
     latticeExtra::layer(sp.points(Locust_Eth_spatial, pch=20, col=1))
 
 **![](https://lh6.googleusercontent.com/7Mc9ReVYKkapNPGAHlNQqns6pTnxYOmHGaQ5gG_DmgWgfZAAyV03Ws3hPl5p4CA3HnEdHp7SSgsDcQfEkJUyYn-pvg6XEV-YBDLLG_C-tz21MvuPZRtUGUJAdqtJYUrM68CIeZtP)**
+
 Map_11: Limiting environmental variables for locust distribution.
 
 This map shows that the limiting environmental variable for locust presence is bio12, or Annual Precipitation. It is interesting to note that the locust detections are falling where these two limiting factors intersect. A hypothesis could be that there is a “sweet spot” in Ethiopia of precipitation and clay percentage that needs to be met for hopper abundance. The next obvious question would be what would the potential distribution of locust be with higher annual precipitation, as predicted by climate models? This is where we move to the finished tool of this work, the interactive command line interface.
