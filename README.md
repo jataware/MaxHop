@@ -88,7 +88,7 @@ The next step was to project the model onto the west Africian raster stack to se
 The model outputs three raster files when projected onto a raster stack. These are raw, logistic, and cloglog. The default is the cloglog raster, which predicts the probability of presence (Map_3).
 
 **![](https://lh6.googleusercontent.com/T9UTYK2DaxeXt2asF2upOtDIPYg7rbEyuRSg6lo4c-ySwpbhGwgTLUikWqQ31HQw3qAJtOefKYR8_p2FLaPmk5oAUL24f4h9Fc8bA8j4SInScezy0zBJ1PApyuLDqI61Y4PuDe1a)**
-**Map_3: Predicted locust presence mode (cloglog)l projected on our training raster stack (western Africa) with the training points plotted.**
+**Map_3: Predicted locust presence model (cloglog) projected on the training raster stack (western Africa) with the training points plotted.**
 
 Next run the maxent model again using some different arguments to see if we can improve the model.
 
