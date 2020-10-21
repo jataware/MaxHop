@@ -212,7 +212,7 @@ For additional information on which environmental variable is limiting the locus
 
 Map_11: Limiting environmental variables for locust distribution.
 
-This map shows that the limiting environmental variable for locust presence is bio12, or Annual Precipitation. It is interesting to note that the locust detections are falling where these two limiting factors intersect. A hypothesis could be that there is a “sweet spot” in Ethiopia of precipitation and clay percentage that needs to be met for hopper abundance. The next obvious question would be what would the potential distribution of locust be with higher annual precipitation, as predicted by climate models? This is where we move to the finished tool of this work, the interactive command line interface.
+This map shows that the limiting environmental variable for locust presence is bio12, or Annual Precipitation. It is interesting to note that the locust detections are falling where these two limiting factors intersect. A hypothesis could be that there is a “sweet spot” in Ethiopia of precipitation and clay percentage that needs to be met for hopper abundance. The next obvious question would be what would the potential distribution of locust be with higher annual precipitation, as predicted by climate models. This is where we move to the finished tool of this work, the interactive command line interface.
 
 ## IV. CLI Tool: Exploring future scenarios
 
