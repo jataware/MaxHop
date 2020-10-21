@@ -1,9 +1,7 @@
 #command line run model
 #an example run would be
-#Rscript maxent_cl.R --country=Ethiopia,Sudan --precipIncrease=.25 --aveTempIncrease=.5 --format=GTiff
+#Rscript maxent_cl.R --country=Ethiopia --annualPrecipIncrease=.25 --meanTempIncrease=.5 --format=GTiff
 
-require(magrittr)
-#install_github('johnbaums/rmaxent')
 library(rmaxent)
 require(magrittr)
 require(dismo)
@@ -13,7 +11,7 @@ require(viridis)
 require(sp)
 require(ggplot2)
 require(MASS)
-
+require(rgdal)
 #get arguments
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -89,14 +87,18 @@ crs(predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,
 names(predictors)<-c("WestAfrica_training_bio4", "WestAfrica_training_bio8", "WestAfrica_training_bio10", "WestAfrica_training_bio12", "WestAfrica_CLYPPT_M_sl2_250m_ll" , "WestAfrica_SNDPPT_M_sl2_250m_ll")
 
 #project model onto stack
-prediction<-project(maxent_model2, predictors)
+prediction<-rmaxent::project(maxent_model2, predictors)
 prediction_log<-prediction$prediction_logistic
 
 if(file.out == "GTiff"){
-  writeRaster(prediction_log,"maxent_test.tiff",format="GTiff", overwrite=T, NAflag=-9999 )
+  rastername=paste0('output/', 'maxent_', country, "_precipChange=",precInc, "tempChange=", aveTemp
+, ".tiff", sep="" )
+  writeRaster(prediction_log, rastername, format="GTiff", overwrite=T, NAflag=-9999 )
   
 }else if(file.out == "ascii"){
-  writeRaster(prediction_log,"maxent_test.asc",format="ascii", overwrite=T, NAflag=-9999 )
+  rastername=paste0('output/','maxent_', country, "_precipChange=",precInc, "tempChange=", aveTemp
+                    , ".asc", sep="" )
+  writeRaster(prediction_log, rastername, format="ascii", overwrite=T, NAflag=-9999 )
   
 }else{
   print("File type not supported")
