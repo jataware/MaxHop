@@ -25,3 +25,5 @@ WORKDIR /usr/local/src/myscripts
 RUN Rscript ./myscript.R
 
 #CMD ["R","/usr/local/src/myscripts/maxent_cl.R"]
+ENTRYPOINT ["Rscript", "/usr/local/src/myscripts/maxent_cl.R"]
+CMD ["--country=Ethiopia", "--annualPrecipIncrease=0", "--meanTempIncrease=0", "--format=GTiff"]

@@ -12,7 +12,8 @@ require(sp)
 require(ggplot2)
 require(MASS)
 require(rgdal)
-#get arguments
+
+#get arguments from cl
 args <- commandArgs(trailingOnly = TRUE)
 
 #flag for --annualPrecipIncrease
@@ -54,12 +55,12 @@ country
 print("end of flag info.")
 
 #load locust data
-locust_file_path<-paste0('hopper_data/',country, '_hoppers.csv',sep="")
-locust_Eth <- read.csv(locust_file_path ,header=TRUE, sep=',')
+#locust_file_path<-paste0('hopper_data/',country, '_hoppers.csv',sep="")
+#locust_Eth <- read.csv(locust_file_path ,header=TRUE, sep=',')
 
 
 #load pretrained maxent model 
-maxent_model2<-readRDS("model/maxent_locust_model_WestAfrica10-15-2020")
+maxent_model<-readRDS("model/maxent_locust_model_WestAfrica10-15-2020")
 
 #create paths to load rasters
 bio4_filePath<-paste0('rasters/',country,"_bio4.asc", sep="")
@@ -87,7 +88,7 @@ crs(predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,
 names(predictors)<-c("WestAfrica_training_bio4", "WestAfrica_training_bio8", "WestAfrica_training_bio10", "WestAfrica_training_bio12", "WestAfrica_CLYPPT_M_sl2_250m_ll" , "WestAfrica_SNDPPT_M_sl2_250m_ll")
 
 #project model onto stack
-prediction<-rmaxent::project(maxent_model2, predictors)
+prediction<-rmaxent::project(maxent_model, predictors)
 prediction_log<-prediction$prediction_logistic
 
 if(file.out == "GTiff"){
