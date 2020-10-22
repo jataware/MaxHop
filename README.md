@@ -246,10 +246,10 @@ The project has a script called maxent_cl.R, which is the main script that runs 
 To run the docker image go into your terminal and navigate to the project directory. Then run it using this format.
 
 
-    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker [command] "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--format=GTiff"
+    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--format=GTiff"
 
 
-This runs the docker container with a volume attached locally in the output folder. The output folder is where the output rasters from the model are saved. The cl_maxent_locust_docker is the image to be run. [command] lets docker know to overwrite the CMD code in the Dockerfile. The parameters are in quotes which are parsed by the r code. These determine which country to use, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii').
+This runs the docker container with a volume attached locally in the output folder. The output folder is where the output rasters from the model are saved. The cl_maxent_locust_docker is the image to be run. The parameters are in quotes which are parsed by the r code. These determine which country to use, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii').
 
 If the example provided above we are setting “country” to Sudan, increasing the Annual Precipitation by 40% across every cell, decreasing Mean Temperature of Warmest Quarter by 20 percent across every cell, and asking for the output to be saved as a tif file.
 
