@@ -264,7 +264,7 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 -   **--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) of warmest quarter where 0 is baseline (no perturbation)
 
 | Countries Supported |  
-|--|--|
+|--|
 | Algeria |
 |Chad|
 |Egypt|
@@ -282,6 +282,6 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 |Sudan|
 
 |Countries Not Supported|  
-|--|--|
+|--|
 | Djibouti (too small of scale) |  
 
