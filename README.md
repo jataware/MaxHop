@@ -256,10 +256,32 @@ If the example provided above we are setting “country” to Sudan, increasing 
 If no parameters are specified the defaults are country=Ethiopia, --annualPrecipIncrease=0, --meanTempIncrease=0, format=GTiff.
 
 **Inputs (all are required)**:
-**--country**: select a country (see table of available countries below). 
-**--annualPrecipIncrease**: a percentage perturbation against annual rainfall (up or down) where 0 is baseline (no perturbation)
-**--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) where 0 is baseline (no perturbation)
 
+-   **--country**: select a country (see table of available countries below).
+    
+-   **--annualPrecipIncrease**: a percentage perturbation against annual rainfall (up or down) where 0 is baseline (no perturbation)
+    
+-   **--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) of warmest quarter where 0 is baseline (no perturbation)
 
+| Countries Supported |  
+|--|--|
+| Algeria |
+|Chad|
+|Egypt|
+|Eritrea|
+|Ethiopia|
+|Kenya|
+|Libya|
+|Mali|
+|Mauritania|
+|Morocco|
+|Niger|
+|S.Sudan|
+|SaudiArabia (don't use spaces)|
+|Somalia|
+|Sudan|
 
+|Countries Not Supported|  
+|--|--|
+| Djibouti (too small of scale) |  
 
