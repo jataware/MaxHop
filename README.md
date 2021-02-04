@@ -232,7 +232,7 @@ Now that we have tested the model and it is performing well, we can interact wit
  **Installation:**
 First you need to clone the github repo.
 
-    git clone [https://github.com/jataware/cl_maxent_locust.git](https://github.com/jataware/cl_maxent_locust.git)
+    git clone https://github.com/jataware/MaxHop.git
 
 Once the repo is installed on your computer navigate to the project folder and build the docker image. This will take some time since it is installing a lot of R packages.
 
