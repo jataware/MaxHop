@@ -14,7 +14,7 @@ The basic inputs to the Jataware locust model are environmental data such as cli
 Data were downloaded from:
 
 1.  [https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/20f6245e-40bc-4ade-aff3-a87d3e4fcc26](https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/20f6245e-40bc-4ade-aff3-a87d3e4fcc26)
-2.  [https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/7e8f1bf4-57a1-4b9d-98b5-f1bbf13d3726]
+2.  https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/7e8f1bf4-57a1-4b9d-98b5-f1bbf13d3726
     
 3.  [https://www.worldclim.org/data/worldclim21.html](https://www.worldclim.org/data/worldclim21.html)
     
