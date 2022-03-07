@@ -60,7 +60,7 @@ print("end of flag info.")
 
 
 #load pretrained maxent model 
-maxent_model<-readRDS("model/maxent_locust_model_WestAfrica10-15-2020")
+maxent_model<-readRDS("model/maxent_locust_model_WestAfrica03_07_2022")
 
 #create paths to load rasters
 bio4_filePath<-paste0('rasters/',country,"_bio4.asc", sep="")
@@ -85,7 +85,7 @@ bio12_mutated<-calc(bio12, function(x) (x * precInc)+x)
 #create raster stack
 predictors<-stack(bio4, bio8, bio10_mutated, bio12_mutated, clay, sand)
 crs(predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
-names(predictors)<-c("WestAfrica_training_bio4", "WestAfrica_training_bio8", "WestAfrica_training_bio10", "WestAfrica_training_bio12", "WestAfrica_CLYPPT_M_sl2_250m_ll" , "WestAfrica_SNDPPT_M_sl2_250m_ll")
+names(predictors)<-c("westAfrica_bio4", "westAfrica_bio8", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_CLYPPT", "westAfrica_SNDPPT")
 
 #project model onto stack
 prediction<-rmaxent::project(maxent_model, predictors)
