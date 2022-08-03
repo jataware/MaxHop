@@ -1,6 +1,7 @@
 #test model on Countries
 #bring in ethiopia rasters
-
+library(devtools)
+install_github('johnbaums/rmaxent')
 library(rmaxent)
 require(magrittr)
 require(dismo)
@@ -12,27 +13,28 @@ require(ggplot2)
 require(MASS)
 require(rgdal)
 
-maxent_model2<-readRDS("model/maxent_locustswarm_model_WestAfrica7-26-2022")
+maxent_model2<-readRDS("model/maxent_locust_model_WestAfrica03_07_2022")
 
 bio4_eth <- raster("rasterData/Ethiopia_bio4.asc")
 bio8_eth <- raster("rasterData/Ethiopia_bio8.asc")
 bio10_eth <- raster("rasterData/Ethiopia_bio10.asc")
 bio12_eth <- raster("rasterData/Ethiopia_bio12.asc")
-clay_eth <- raster("rasterData/Ethiopia_SNDPPT_M_sl2_250m_ll.asc")
+clay_eth <- raster("rasterData/Ethiopia_CLYPPT_M_sl2_250m_ll.asc")
+snd_eth <- raster("rasterData/Ethiopia_SNDPPT_M_sl2_250m_ll.asc")
 maxent_model2
 clay_eth
 plot(clay_eth)
 bio12_eth
 plot(bio12_eth)
 
-Ethiopia_predictors<-stack(bio4_eth, bio8_eth, bio10_eth, bio12_eth, clay_eth)
+Ethiopia_predictors<-stack(clay_eth, bio10_eth, bio12_eth, bio4_eth, bio8_eth,clay_eth)
 crs(Ethiopia_predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
-names(Ethiopia_predictors)<-c("WestAfrica_training_bio4", "WestAfrica_training_bio8", "WestAfrica_training_bio10", "WestAfrica_training_bio12", "WestAfrica_training_SNDPPT_sd2" )
+names(Ethiopia_predictors)<-c("westAfrica_CLYPPT", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_bio4", "westAfrica_bio8", "westAfrica_SNDPPT" )
 Ethiopia_predictors
 
 #Prediction on Ethiopia based on new model
 
-prediction_eth<-project(maxent_model2, Ethiopia_predictors)
+prediction_eth<-rmaxent::project(maxent_model2, Ethiopia_predictors)
 prediction_eth
 plot(prediction_eth$prediction_raw)
 
