@@ -1,12 +1,24 @@
 #test model on Countries
 #bring in ethiopia rasters
-maxent_model2<-readRDS("models/maxent_locust_model_WestAfrica10-14-2020")
 
-bio4_eth <- raster("rasterData/Ethiopia_rasters/bio4_ethiopia.asc")
-bio8_eth <- raster("rasterData/Ethiopia_rasters/bio8_ethiopia.asc")
-bio10_eth <- raster("rasterData/Ethiopia_rasters/bio10_ethiopia.asc")
-bio12_eth <- raster("rasterData/Ethiopia_rasters/bio12_ethiopia.asc")
-clay_eth <- raster("rasterData/Ethiopia_rasters/Ethiopia_af_SNDPP_250m.asc")
+library(rmaxent)
+require(magrittr)
+require(dismo)
+require(raster)
+require(rasterVis)
+require(viridis)
+require(sp)
+require(ggplot2)
+require(MASS)
+require(rgdal)
+
+maxent_model2<-readRDS("model/maxent_locustswarm_model_WestAfrica7-26-2022")
+
+bio4_eth <- raster("rasterData/Ethiopia_bio4.asc")
+bio8_eth <- raster("rasterData/Ethiopia_bio8.asc")
+bio10_eth <- raster("rasterData/Ethiopia_bio10.asc")
+bio12_eth <- raster("rasterData/Ethiopia_bio12.asc")
+clay_eth <- raster("rasterData/Ethiopia_SNDPPT_M_sl2_250m_ll.asc")
 maxent_model2
 clay_eth
 plot(clay_eth)
@@ -26,7 +38,7 @@ plot(prediction_eth$prediction_raw)
 
 #Bring in Locust hopper points to plot on top of prediction raster.
 
-locust_Eth <- read.csv('rasterData/Ethiopia_rasters/Ethiopia_hoppers.csv',header=TRUE, sep=',')
+locust_Eth <- read.csv('swarmdata/swarms_ethiopia.csv',header=TRUE, sep=',')
 #remove points where locust weren't found
 locust_Eth<-locust_Eth %>% 
   dplyr::filter(LOCPRESENT == 1)
@@ -49,7 +61,7 @@ levelplot(prediction_eth$prediction_cloglog, margin=FALSE, col.regions=viridis, 
 #Check out lambda values
 parse_lambdas(maxent_model2)
 
-writeRaster(prediction_eth$prediction_logistic, "rasterData/Ethiopia_rasters/Ethiopia_predion_logistic.tif", format="GTiff")
+writeRaster(prediction_eth$prediction_logistic, "rasterData/Ethiopia_predion_logistic.tif", format="GTiff")
 
 #make some backups to work with
 locust_Eth_backup<-locust_Eth
