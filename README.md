@@ -297,7 +297,8 @@ The model was retrained on presence data for locust swarms with the same countri
 
 **Difference between hoppers and swarms**
 
-![nganimals-2005-locust-second-wave_ai2html-desktop-small](https://user-images.githubusercontent.com/66642227/184413846-ecb9dee8-d14c-4c5c-a022-a147b2ce9c68.jpg)
+<img width="843" alt="Screen Shot 2022-08-13 at 2 48 14 AM" src="https://user-images.githubusercontent.com/66642227/184414978-61b825ea-50d4-4b88-8775-722d48a6e006.png">
+
 
 Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms – their most destructive stage of development. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior completely changes once becoming a sexually mature adult. Locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. Their solitary lifestyles shifts to a gregarious one in which they travel together as swarms. As swarms, the locusts migrate long distances in search of food; thus, their movement is largely determined by factors related to food and wind. Some research suggests that swarm movement is primarily driven by both the need to find nutrients and to stay with the swarm so that individuals lessen the chance of falling prey to external predators (Bazazi, S., Buhl, J., Hale, J.J. et al. Collective Motion and Cannibalism in Locust Migratory Bands. Current Biology, 18, 10 (2008). https://doi.org/10.1016/j.cub.2008.04.035).
 
