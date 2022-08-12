@@ -295,12 +295,12 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 
 The model was retrained on presence data for locust swarms with the same countries in western Africa used for the hopper data. The Github repository includes both pre-trained models for locust hoppers and swarms. 
 
-**Difference between hoppers and swarms**:
+**Difference between hoppers and swarms**
 
 Image 
 
-Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms – their most destructive stage of development. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior completely changes once becoming a sexually mature adult. Locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. Their solitary lifestyles shifts to one in which they travel together as a swarm. As swarms, the locusts migrate long distances in search of food; thus, their movement is largely determined by factors related to food and wind.
+Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms – their most destructive stage of development. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior completely changes once becoming a sexually mature adult. Locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. Their solitary lifestyles shifts to a gregarious one in which they travel together as swarms. As swarms, the locusts migrate long distances in search of food; thus, their movement is largely determined by factors related to food and wind. Some research suggests that swarm movement is primarily driven by both the need to find nutrients and to stay with the swarm so that individuals lessen the chance of falling prey to external predators (Bazazi, S., Buhl, J., Hale, J.J. et al. Collective Motion and Cannibalism in Locust Migratory Bands. Current Biology, 18, 10 (2008). https://doi.org/10.1016/j.cub.2008.04.035)
 
 **Model Performance**
 
-We expect a degradation in the performance of the model for locust swarms 
+As our locust model predicts the probability of locust presence in Africa using a maximum entropy model over environmental data, we expect a degradation in the performance of the model for locust swarms with respect to hoppers. Though environmental factors can help predict areas rich in nutrients, our model fails to produce a reliable prediction by not considering other factors influencing locust swarm movement. 
