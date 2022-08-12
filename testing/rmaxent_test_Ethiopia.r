@@ -13,14 +13,14 @@ require(ggplot2)
 require(MASS)
 require(rgdal)
 
-maxent_model2<-readRDS("model/maxent_locust_model_WestAfrica03_07_2022")
+maxent_model2<-readRDS("model/maxent_locustswarm_model_WestAfrica7-26-2022")
 
-bio4_eth <- raster("rasterData/Ethiopia_bio4.asc")
-bio8_eth <- raster("rasterData/Ethiopia_bio8.asc")
-bio10_eth <- raster("rasterData/Ethiopia_bio10.asc")
-bio12_eth <- raster("rasterData/Ethiopia_bio12.asc")
-clay_eth <- raster("rasterData/Ethiopia_CLYPPT_M_sl2_250m_ll.asc")
-snd_eth <- raster("rasterData/Ethiopia_SNDPPT_M_sl2_250m_ll.asc")
+bio4_eth <- raster("rasters/Ethiopia_bio4.asc")
+bio8_eth <- raster("rasters/Ethiopia_bio8.asc")
+bio10_eth <- raster("rasters/Ethiopia_bio10.asc")
+bio12_eth <- raster("rasters/Ethiopia_bio12.asc")
+clay_eth <- raster("rasters/Ethiopia_CLYPPT_M_sl2_250m_ll.asc")
+snd_eth <- raster("rasters/Ethiopia_SNDPPT_M_sl2_250m_ll.asc")
 maxent_model2
 clay_eth
 plot(clay_eth)
