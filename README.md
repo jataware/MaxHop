@@ -20,6 +20,7 @@ Data were downloaded from:
     
 4.  https://locust-hub-hqfao.hub.arcgis.com/datasets/hoppers-1
 
+5. https://locust-hub-hqfao.hub.arcgis.com/datasets/hqfao::swarms-1/about
 
 The inputs to the model are:
 
@@ -37,6 +38,8 @@ The inputs to the model are:
 6.  Sand = Soil sand Content
     
 7.  Hopper Data = Presence data for locust hoppers.
+
+8.  Swarm Data = Presence data for locust swarms. 
 
 
 
@@ -288,9 +291,14 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 
 ## V. Swarm Prediction
 
-The model was retrained on presence data for locust swarms using multiple countries in western Africa. The Github repository includes both pre-trained models for locust hoppers and swarms. 
-
+The model was retrained on presence data for locust swarms with the same countries in western Africa used for the hopper data. The Github repository includes both pre-trained models for locust hoppers and swarms. 
 
 **Difference between hoppers and swarms**:
 
-Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms, durinig which they  most agricultural damage occurs. 
+Image 
+
+Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms during their most destructive stage of devleopment. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior can completely change as a sexually mature adult with wings. The locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. They become more sociable influenced by food and wind fly for long periods of time. 
+
+**Model Performance**
+
+As swarms differ 
