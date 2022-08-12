@@ -286,3 +286,11 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 |--|
 | Djibouti (too small of scale) |  
 
+## V. Swarm Prediction
+
+The model was retrained on presence data for locust swarms using multiple countries in western Africa. The Github repository includes both pre-trained models for locust hoppers and swarms. 
+
+
+**Difference between hoppers and swarms**:
+
+Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms, durinig which they  most agricultural damage occurs. 
