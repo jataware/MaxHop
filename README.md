@@ -250,14 +250,14 @@ The project has a script called maxent_cl.R, which is the main script that runs 
 To run the docker image go into your terminal and navigate to the project directory. Then run it using this format.
 
 
-    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--format=GTiff"
+    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "modeltype=hopper" "--format=GTiff"
 
 
 This runs the docker container with a volume attached locally in the output folder. The output folder is where the output rasters from the model are saved. The cl_maxent_locust_docker is the image to be run. The parameters are in quotes which are parsed by the r code. These determine which country to use, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii').
 
 If the example provided above we are setting “country” to Sudan, increasing the Annual Precipitation by 40% across every cell, decreasing Mean Temperature of Warmest Quarter by 20 percent across every cell, and asking for the output to be saved as a tif file.
 
-If no parameters are specified the defaults are country=Ethiopia, --annualPrecipIncrease=0, --meanTempIncrease=0, format=GTiff.
+If no parameters are specified the defaults are country=Ethiopia, --annualPrecipIncrease=0, --meanTempIncrease=0, -- format=GTiff.
 
 **Inputs (all are required)**:
 
@@ -266,6 +266,8 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 -   **--annualPrecipIncrease**: a percentage perturbation against annual rainfall (up or down) where 0 is baseline (no perturbation)
     
 -   **--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) of warmest quarter where 0 is baseline (no perturbation)
+
+-   **--modeltype**: select either the pre-trained model for locust hoppers or swarms. 
 
 | Countries Supported |  
 |--|
@@ -297,8 +299,8 @@ The model was retrained on presence data for locust swarms with the same countri
 
 Image 
 
-Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms during their most destructive stage of devleopment. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior can completely change as a sexually mature adult with wings. The locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. They become more sociable influenced by food and wind fly for long periods of time. 
+Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms – their most destructive stage of development. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, its behavior completely changes once becoming a sexually mature adult. Locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. Their solitary lifestyles shifts to one in which they travel together as a swarm. As swarms, the locusts migrate long distances in search of food; thus, their movement is largely determined by factors related to food and wind.
 
 **Model Performance**
 
-As swarms differ 
+We expect a degradation in the performance of the model for locust swarms 
