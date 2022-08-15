@@ -250,7 +250,7 @@ The project has a script called maxent_cl.R, which is the main script that runs 
 To run the docker image go into your terminal and navigate to the project directory. Then run it using this format.
 
 
-    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "modeltype=hopper" "--format=GTiff"
+    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--modeltype=hopper" "--format=GTiff"
 
 
 This runs the docker container with a volume attached locally in the output folder. The output folder is where the output rasters from the model are saved. The cl_maxent_locust_docker is the image to be run. The parameters are in quotes which are parsed by the r code. These determine which country to use, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii').
@@ -267,7 +267,7 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
     
 -   **--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) of warmest quarter where 0 is baseline (no perturbation)
 
--   **--modeltype**: select either the pre-trained model for locust hoppers or swarms. 
+-   **--modeltype**: select either the pre-trained model for locust hoppers `hopper` or swarms `swarm`. 
 
 | Countries Supported |  
 |--|
@@ -307,4 +307,4 @@ Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided
 
 ### Model Performance
 
-As our locust model predicts the probability of locust presence in Africa using a maximum entropy model over environmental data, we expect a degradation in the performance of the model for locust swarms with respect to hoppers. Though environmental factors can help predict areas rich in nutrients, our model fails to produce a reliable prediction by not considering other factors influencing locust swarm movement. 
+As our locust model predicts the probability of locust presence in Africa using a maximum entropy model over environmental data, we expect a degradation in the performance of the model for locust swarms with respect to hoppers. Though environmental factors can help predict areas rich in nutrients, our model fails to produce a reliable prediction by not considering other factors influencing locust swarm movement. This model yields an AUC of 0.58.

@@ -40,7 +40,7 @@ if(length(grep('--county*', args, value = TRUE))==1){
 if(length(grep('--modeltype*', args, value = TRUE))==1){
   modeltype <- toString(strsplit(grep('--modeltype*', args, value = TRUE), split = '=')[[1]][[2]])
 }else{
-  modeltype<- "swarm"
+  modeltype<- "hopper"
 }
 
 if(length(grep('--format*', args, value = TRUE))==1){
@@ -67,8 +67,12 @@ print("end of flag info.")
 #locust_Eth <- read.csv(locust_file_path ,header=TRUE, sep=',')
 
 
-#load maxent models 
-model_file_path<-paste0('model/maxent_locust_model_WestAfrica03_07_2022_',modeltype,sep="")
+#load maxent models
+if (modeltype == "swarm") {
+  model_file_path<-'model/maxent_locust_model_WestAfrica7-26-2022_swarm'
+} else {
+  model_file_path<-'model/maxent_locust_model_WestAfrica03_07_2022_hopper'
+}
 maxent_model<-readRDS (model_file_path)
 
 #create paths to load rasters
@@ -94,8 +98,11 @@ bio12_mutated<-calc(bio12, function(x) (x * precInc)+x)
 #create raster stack
 predictors<-stack(bio4, bio8, bio10_mutated, bio12_mutated, clay, sand)
 crs(predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
-names(predictors)<-c("westAfrica_bio4", "westAfrica_bio8", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_CLYPPT", "westAfrica_SNDPPT")
-
+if (modeltype == "swarm") {
+  names(predictors)<-c("westAfrica_bio_4", "westAfrica_bio_8", "westAfrica_bio_10", "westAfrica_bio_12", "westAfrica_clay", "westAfrica_sand")
+} else {
+  names(predictors)<-c("westAfrica_bio4", "westAfrica_bio8", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_CLYPPT", "westAfrica_SNDPPT")
+}
 #project model onto stack
 prediction<-rmaxent::project(maxent_model, predictors)
 prediction_log<-prediction$prediction_logistic

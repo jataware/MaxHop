@@ -13,7 +13,7 @@ require(ggplot2)
 require(MASS)
 require(rgdal)
 
-maxent_model2<-readRDS("model/maxent_locustswarm_model_WestAfrica7-26-2022")
+maxent_model2<-readRDS("model/maxent_locust_model_WestAfrica7-26-2022_swarm")
 
 bio4_eth <- raster("rasters/Ethiopia_bio4.asc")
 bio8_eth <- raster("rasters/Ethiopia_bio8.asc")
@@ -27,9 +27,9 @@ plot(clay_eth)
 bio12_eth
 plot(bio12_eth)
 
-Ethiopia_predictors<-stack(clay_eth, bio10_eth, bio12_eth, bio4_eth, bio8_eth,clay_eth)
+Ethiopia_predictors<-stack(bio4_eth, bio8_eth, bio10_eth, bio12_eth, clay_eth, snd_eth)
 crs(Ethiopia_predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
-names(Ethiopia_predictors)<-c("westAfrica_CLYPPT", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_bio4", "westAfrica_bio8", "westAfrica_SNDPPT" )
+names(Ethiopia_predictors)<-c("westAfrica_bio_4", "westAfrica_bio_8", "westAfrica_bio_10", "westAfrica_bio_12", "westAfrica_clay", "westAfrica_sand" )
 Ethiopia_predictors
 
 #Prediction on Ethiopia based on new model
@@ -63,7 +63,7 @@ levelplot(prediction_eth$prediction_cloglog, margin=FALSE, col.regions=viridis, 
 #Check out lambda values
 parse_lambdas(maxent_model2)
 
-writeRaster(prediction_eth$prediction_logistic, "rasterData/Ethiopia_predion_logistic.tif", format="GTiff")
+writeRaster(prediction_eth$prediction_logistic, "Ethiopia_predion_logistic.tif", format="GTiff")
 
 #make some backups to work with
 locust_Eth_backup<-locust_Eth
