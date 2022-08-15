@@ -20,6 +20,7 @@ Data were downloaded from:
     
 4.  https://locust-hub-hqfao.hub.arcgis.com/datasets/hoppers-1
 
+5. https://locust-hub-hqfao.hub.arcgis.com/datasets/hqfao::swarms-1/about
 
 The inputs to the model are:
 
@@ -37,6 +38,8 @@ The inputs to the model are:
 6.  Sand = Soil sand Content
     
 7.  Hopper Data = Presence data for locust hoppers.
+
+8.  Swarm Data = Presence data for locust swarms. 
 
 
 
@@ -247,14 +250,14 @@ The project has a script called maxent_cl.R, which is the main script that runs 
 To run the docker image go into your terminal and navigate to the project directory. Then run it using this format.
 
 
-    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--format=GTiff"
+    docker run -v ~/cl_maxent_locust/output:/usr/local/src/myscripts/output cl_maxent_locust_docker "--country=Sudan" "--annualPrecipIncrease=.4" "--meanTempIncrease=-.2" "--modeltype=hopper" "--format=GTiff"
 
 
 This runs the docker container with a volume attached locally in the output folder. The output folder is where the output rasters from the model are saved. The cl_maxent_locust_docker is the image to be run. The parameters are in quotes which are parsed by the r code. These determine which country to use, how much to increase or decrease the Annual Precipitation (--annualPrecipIncrease) or Mean Temperature of Warmest Quarter (--meanTempIncrease), and the type of file output ('GTiff' or 'ascii').
 
 If the example provided above we are setting “country” to Sudan, increasing the Annual Precipitation by 40% across every cell, decreasing Mean Temperature of Warmest Quarter by 20 percent across every cell, and asking for the output to be saved as a tif file.
 
-If no parameters are specified the defaults are country=Ethiopia, --annualPrecipIncrease=0, --meanTempIncrease=0, format=GTiff.
+If no parameters are specified the defaults are country=Ethiopia, --annualPrecipIncrease=0, --meanTempIncrease=0, -- format=GTiff.
 
 **Inputs (all are required)**:
 
@@ -263,6 +266,8 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 -   **--annualPrecipIncrease**: a percentage perturbation against annual rainfall (up or down) where 0 is baseline (no perturbation)
     
 -   **--meanTempIncrease**: a percentage perturbation against annual mean temperature (up or down) of warmest quarter where 0 is baseline (no perturbation)
+
+-   **--modeltype**: select either the pre-trained model for locust hoppers `hopper` or swarms `swarm`. 
 
 | Countries Supported |  
 |--|
@@ -286,3 +291,20 @@ If no parameters are specified the defaults are country=Ethiopia, --annualPrecip
 |--|
 | Djibouti (too small of scale) |  
 
+## V. Swarm Prediction
+
+The model was retrained on presence data for locust swarms with the same countries in western Africa used for the hopper data. The Github repository includes both pre-trained models for locust hoppers and swarms. 
+
+
+### Difference between hoppers and swarms
+
+
+
+<img width="843" alt="Screen Shot 2022-08-13 at 2 48 14 AM" src="https://user-images.githubusercontent.com/66642227/184414978-61b825ea-50d4-4b88-8775-722d48a6e006.png">
+
+
+Locusts undergo 3 main stages of development: egg, hopper, and adult. We decided to expand the model to account for locusts as adult swarms – their most destructive stage of development. After the locust egg hatches, it grows hind legs to jump or hop around on. During this hopper stage, the locust's movement is largely determined by environmental factors. However, when large amounts of rainfall follow a drought, the behavior of a fully mature adult locust completely changes. Locusts crowd onto small areas of vegetation during droughts and begin to breed rapidly once the rainfall ensues. Their solitary lifestyles shift to gregarious ones in which they travel together as swarms. The locust swarms migrate long distances in search of food; thus, their movement is largely determined by factors related to food and wind. Some research even suggests that swarm movement is  driven by both the "need to find nutrients and to stay with the swarm so that individual locus lessen the chance of falling prey to external predators" (Bazazi, S., Buhl, J., Hale, J.J. et al. Collective Motion and Cannibalism in Locust Migratory Bands. Current Biology, 18, 10 (2008). https://doi.org/10.1016/j.cub.2008.04.035).
+
+### Model Performance
+
+As our locust model predicts the probability of locust presence in Africa using a maximum entropy model over environmental data, we expect a degradation in the performance of the model for locust swarms with respect to hoppers. Though environmental factors can help predict areas rich in nutrients, our model fails to produce a reliable prediction by not considering other factors influencing locust swarm movement. This model yields an AUC of 0.58.

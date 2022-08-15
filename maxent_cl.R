@@ -1,6 +1,6 @@
 #command line run model
 #an example run would be
-#Rscript maxent_cl.R --country=Ethiopia --annualPrecipIncrease=.25 --meanTempIncrease=.5 --format=GTiff
+#Rscript maxent_cl.R --country=Ethiopia --annualPrecipIncrease=.25 --meanTempIncrease=.5 --modeltype=hopper --format=GTiff
 
 library(rmaxent)
 require(magrittr)
@@ -37,6 +37,12 @@ if(length(grep('--county*', args, value = TRUE))==1){
   country<-"Ethiopia"
 }
 
+if(length(grep('--modeltype*', args, value = TRUE))==1){
+  modeltype <- toString(strsplit(grep('--modeltype*', args, value = TRUE), split = '=')[[1]][[2]])
+}else{
+  modeltype<- "hopper"
+}
+
 if(length(grep('--format*', args, value = TRUE))==1){
   file.out <- toString(strsplit(grep('--format*', args, value = TRUE), split = '=')[[1]][[2]])
 }else{
@@ -52,6 +58,8 @@ print("Percent increase in Mean Temperature of Warmest Quarter")
 aveTemp
 print("Country to project model")
 country
+print("Pretrained Model")
+modeltype
 print("end of flag info.")
 
 #load locust data
@@ -59,8 +67,13 @@ print("end of flag info.")
 #locust_Eth <- read.csv(locust_file_path ,header=TRUE, sep=',')
 
 
-#load pretrained maxent model 
-maxent_model<-readRDS("model/maxent_locust_model_WestAfrica03_07_2022")
+#load maxent models
+if (modeltype == "swarm") {
+  model_file_path<-'model/maxent_locust_model_WestAfrica7-26-2022_swarm'
+} else {
+  model_file_path<-'model/maxent_locust_model_WestAfrica03_07_2022_hopper'
+}
+maxent_model<-readRDS (model_file_path)
 
 #create paths to load rasters
 bio4_filePath<-paste0('rasters/',country,"_bio4.asc", sep="")
@@ -85,19 +98,22 @@ bio12_mutated<-calc(bio12, function(x) (x * precInc)+x)
 #create raster stack
 predictors<-stack(bio4, bio8, bio10_mutated, bio12_mutated, clay, sand)
 crs(predictors)<-"+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
-names(predictors)<-c("westAfrica_bio4", "westAfrica_bio8", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_CLYPPT", "westAfrica_SNDPPT")
-
+if (modeltype == "swarm") {
+  names(predictors)<-c("westAfrica_bio_4", "westAfrica_bio_8", "westAfrica_bio_10", "westAfrica_bio_12", "westAfrica_clay", "westAfrica_sand")
+} else {
+  names(predictors)<-c("westAfrica_bio4", "westAfrica_bio8", "westAfrica_bio10", "westAfrica_bio12", "westAfrica_CLYPPT", "westAfrica_SNDPPT")
+}
 #project model onto stack
 prediction<-rmaxent::project(maxent_model, predictors)
 prediction_log<-prediction$prediction_logistic
 
 if(file.out == "GTiff"){
-  rastername=paste0('output/', 'maxent_', country, "_precipChange=",precInc, "tempChange=", aveTemp
+  rastername=paste0('output/', 'maxent_', modeltype, country, "_precipChange=",precInc, "tempChange=", aveTemp
 , ".tiff", sep="" )
   writeRaster(prediction_log, rastername, format="GTiff", overwrite=T, NAflag=-9999 )
   
 }else if(file.out == "ascii"){
-  rastername=paste0('output/','maxent_', country, "_precipChange=",precInc, "tempChange=", aveTemp
+  rastername=paste0('output/','maxent_', modeltype, country, "_precipChange=",precInc, "tempChange=", aveTemp
                     , ".asc", sep="" )
   writeRaster(prediction_log, rastername, format="ascii", overwrite=T, NAflag=-9999 )
   
