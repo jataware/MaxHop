@@ -12,6 +12,17 @@ require(sp)
 require(ggplot2)
 require(MASS)
 require(rgdal)
+require(jsonlite)
+
+# Read configuration from a JSON file
+config <- fromJSON("config.json")
+
+# Extract country from the JSON file
+if(!is.null(config$country)){
+  country <- config$country
+}else{
+  country <- "Ethiopia"
+}
 
 #get arguments from cl
 args <- commandArgs(trailingOnly = TRUE)
@@ -28,13 +39,6 @@ if(length(grep('meanTempIncrease*', args, value = TRUE))==1){
   aveTemp <- as.numeric(strsplit(grep('--meanTempIncrease*', args, value = TRUE), split = '=')[[1]][[2]])
 }else{
   aveTemp<-0
-}
-
-
-if(length(grep('--county*', args, value = TRUE))==1){
-  country <- toString(strsplit(grep('--county*', args, value = TRUE), split = '=')[[1]][[2]])
-}else{
-  country<-"Ethiopia"
 }
 
 if(length(grep('--modeltype*', args, value = TRUE))==1){
